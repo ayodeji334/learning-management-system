@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react'
 import {
   withAuthUser,
   withAuthUserTokenSSR,
-  AuthAction,
-  useAuthUser
+  AuthAction
 } from 'next-firebase-auth'
 import Header from '../components/Header'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
@@ -14,13 +13,10 @@ import { useToast } from '@chakra-ui/react'
 import LoginForm from '../components/LoginForm'
 
 const Login = () => {
-  const AuthUser = useAuthUser();
-
-  console.log(AuthUser.email);
   return (
     <div className="w-full h-full">
       <div className="w-full h-full">
-        <Header title="Home Page" />
+        <Header title="Login Page" />
         <div className="w-full h-full">
               <div className="w-full h-full flex flex-row-reverse">
                   <div className="lg:block hidden w-1/2 h-full bg-purple-900 px-20 text-white">
@@ -36,6 +32,19 @@ const Login = () => {
                         </p>
                     </div>
                   </div>
+                  <div className="w-full lg:w-1/2 h-full">
+                      <div className="h-full w-full">
+                          <div className="w-full h-full flex flex-col justify-center items-center">
+                              <div className="w-9/12 lg:w-3/5 py-4">
+                                  <h2 className="text-xl lg:text-left font-extrabold py-3">Sign In</h2>
+                                  <p className="pb-4 text-sm">Enter your username and password to start the exam</p>
+                                  <div className="py-9">
+                                    <LoginForm />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
           </div>
       </div>
@@ -44,11 +53,11 @@ const Login = () => {
 }
 
 export const getServerSideProps = withAuthUserTokenSSR({
-  whenAuthed: AuthAction.REDIRECT_TO_LOGIN,
+  whenAuthed: AuthAction.REDIRECT_TO_APP,
 })()
 
 export default withAuthUser({
-  whenAuthed: AuthAction.REDIRECT_TO_LOGIN,
+  whenAuthed: AuthAction.REDIRECT_TO_APP,
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
   whenUnauthedAfterInit: AuthAction.RENDER,
   LoaderComponent: FullPageLoader,

@@ -11,15 +11,12 @@ const handler = async (req, res) => {
 
   let favoriteColor
 
-  // This "unauthenticated" token is just an demo of the
-  // "SSR with no token" example.
   if (token === 'unauthenticated') {
     favoriteColor = 'unknown, because you called the API without an ID token'
   } else {
     try {
       await verifyIdToken(token)
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.error(e)
       return res.status(403).json({ error: 'Not authorized' })
     }

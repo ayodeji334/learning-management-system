@@ -39,35 +39,12 @@ const Demo = ({ favoriteColor }) => {
 }
 
 export const getServerSideProps = withAuthUserTokenSSR({
-  whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
-})(async ({ AuthUser, req }) => {
-  // Optionally, get other props.
-  // You can return anything you'd normally return from
-  // `getServerSideProps`, including redirects.
-  // https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
-  const token = await AuthUser.getIdToken()
-  const endpoint = getAbsoluteURL('/api/example', req)
-  const response = await fetch(endpoint, {
-    method: 'GET',
-    headers: {
-      Authorization: token || 'unauthenticated',
-    },
-  })
-  const data = await response.json()
-  if (!response.ok) {
-    throw new Error(
-      `Data fetching failed with status ${response.status}: ${JSON.stringify(
-        data
-      )}`
-    )
-  }
-  return {
-    props: {
-      favoriteColor: data.favoriteColor,
-    },
-  }
-})
+  whenAuthed: AuthAction.REDIRECT_TO_APP,
+})()
 
 export default withAuthUser({
-  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-})(Demo)
+  whenAuthed: AuthAction.REDIRECT_TO_APP,
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+  whenUnauthedAfterInit: AuthAction.RENDER,
+  LoaderComponent: FullPageLoader,
+})(Login)

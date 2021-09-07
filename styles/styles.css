@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
 html,body,#__next{
-    font-family: "Poppins", Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
     font-size: 16px;
     line-height: 1.42857143;
     color: #333;
@@ -10,7 +12,7 @@ html,body,#__next{
     overflow-x: hidden;
 }
 .bg_overlay{
-    background: linear-gradient(0deg, #0e013db7, #040346bd), url('../public/bg_pic.jpg');
+    background: linear-gradient(0deg, #0e013db7, #040346bd), url('../public//vercel.svg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

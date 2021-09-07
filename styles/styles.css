@@ -1,0 +1,22 @@
+html,body,#__next{
+    font-family: "Poppins", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color:#fff;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+.bg_overlay{
+    background: linear-gradient(0deg, #0e013db7, #040346bd), url('../public/bg_pic.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+}
+.alert-container{
+    background-color: #000000b7;
+    z-index: 10000;
+}
